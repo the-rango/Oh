@@ -85,6 +85,13 @@ export default class Myproject extends Component {
             color="#708090"
           />
         </View>
+        <View style={{ marginTop: 15 }}>
+          <Button
+            onPress={() => this.props.navigation.navigate('Record')}
+            title="Record Yourself"
+            color="#708090"
+          />
+        </View>
       </View>
     );
   }

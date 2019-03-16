@@ -134,6 +134,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-sound')
+    implementation project(':react-native-audio')
     implementation project(':react-native-push-notification')
     implementation project(':react-native-vector-icons')
     compile project(":rncamerakit")
