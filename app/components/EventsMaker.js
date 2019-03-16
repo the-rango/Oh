@@ -11,7 +11,9 @@ export default class DateTimePickerTester extends Component {
   this.state = {
     dialogVisible: false,
     text : "",
-    listOfEvents:[]
+    listOfEvents:[],
+    id:0
+
   };
 }
   showDialog = () => {
@@ -31,7 +33,7 @@ export default class DateTimePickerTester extends Component {
 
   submitText =()=>
   {
-    this.setState({dialogVisible:false,listOfEvents:this.state.listOfEvents.concat([this.state.text])});
+    this.setState({id:this.state.id++,dialogVisible:false,listOfEvents:this.state.listOfEvents.concat([this.state.text])});
   }
   render() {
     return (
@@ -43,7 +45,7 @@ export default class DateTimePickerTester extends Component {
        
        <FlatList
           data={this.state.listOfEvents}
-          renderItem={({item}) => <Event text={this.state.text}></Event>}
+          renderItem={({item}) => <Event id={this.state.id} text={this.state.text}></Event>}
         />
         
         <Dialog.Container visible={this.state.dialogVisible}>

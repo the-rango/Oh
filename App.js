@@ -8,13 +8,17 @@ import CameraScreen from "./app/components/Component1"
 import ImageScreen from "./app/components/ImageScreen"
 import SearchImage from "./app/components/SearchImage"
 import EventScreen from "./app/components/EventsMaker"
+import LocationScreen  from "./app/components/getLocation"
+import Memo from "./app/components/memo"
 const AppNavigator = createStackNavigator({
   Home:  HomeScreen,
   SearchImage:SearchImage,
   Details:  DetailsScreen,
   Cameras: CameraScreen,
   Image:ImageScreen,
-  Event:EventScreen
+  Event:EventScreen,
+  Location:LocationScreen,
+  Memo:Memo
 }, {
     initialRouteName: 'Home',
 });

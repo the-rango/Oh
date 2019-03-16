@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View ,Switch} from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import NotifService from "./notiService"
 
 export default class DateTimePickerTester extends Component {
   constructor(props){
@@ -10,23 +11,55 @@ export default class DateTimePickerTester extends Component {
    time :undefined,
     text : this.props.text,
     switchValue:false,
-    isDateTimePickerVisible: false,
+    id :this.props.id,
+    date : "",
+    isDateTimePickerVisible: true
   };
+  this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
+
 }
  
+onRegister(token) {
+  Alert.alert("Registered !", JSON.stringify(token));
+  console.log(token);
+  this.setState({ registerToken: token.token, gcmRegistered: true });
+}
+
+onNotif(notif) {
+  console.log(notif);
+  Alert.alert(notif.title, notif.message);
+}
+
+showDialog = () => {
+  this.setState({ dialogVisible: true });
+};
+
+handleCancel = () => {
+  this.setState({ dialogVisible: false });
+};
 
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    console.log('A date has been picked: ', date);
-    this.setState({time:date.toLocaleString()});
-    this._hideDateTimePicker();
+  
+      this.notif.scheduleNotif(date,this.state.id);
+      console.log('A date has been picked: ', date);
+      this.setState({time:date.toLocaleString(),date:date,switchValue:true});
+      this._hideDateTimePicker();
+  
   };
 toogleSwitch =(value)=>
 {
-  this.setState({switchValue:value});
+  this.setState({switchValue:value},()=>{
+    if(value)
+    {
+      this.notif.scheduleNotif(this.state.date,this.state.id);
+    }
+    else
+    this.notif.cancelNotif(this.state.id);
+  });
 }
   render () {
     return (

@@ -12,6 +12,11 @@ ImageBackground
 } from 'react-native';
 
 export default class Myproject extends Component {
+  constructor(props) {
+    super(props);
+    
+
+  }
 
   componentWillMount() {
     setInterval(
@@ -25,6 +30,7 @@ export default class Myproject extends Component {
     );
   }
   state = { curTime: null };
+  
   render() {
     return (
       <View style={{ flex: 2, justifyContent: 'center', margin: 15, backgroundColor: '#fffff0' }}>
@@ -58,7 +64,7 @@ export default class Myproject extends Component {
 
         <View style={{ marginTop: 15, fontSize: 50 }}>
           <Button
-            onPress={() => this.props.navigation.navigate('Image')}
+            onPress={() => this.props.navigation.navigate('Memo')}
             title="Take a Picture"
             color="#9acd32"
           />
@@ -74,7 +80,7 @@ export default class Myproject extends Component {
 
         <View style={{ marginTop: 15 }}>
           <Button
-            onPress={() => this.props.navigation.navigate('Details')}
+            onPress={() => this.props.navigation.navigate('Location')}
             title="Record Yourself"
             color="#708090"
           />
