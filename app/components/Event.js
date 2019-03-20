@@ -44,7 +44,7 @@ handleCancel = () => {
 
   _handleDatePicked = (date) => {
   
-      this.notif.scheduleNotif(date,this.state.id);
+      this.notif.scheduleNotif(date,this.state.id,this.state.text);
       console.log('A date has been picked: ', date);
       this.setState({time:date.toLocaleString(),date:date,switchValue:true});
       this._hideDateTimePicker();
@@ -55,7 +55,7 @@ toogleSwitch =(value)=>
   this.setState({switchValue:value},()=>{
     if(value)
     {
-      this.notif.scheduleNotif(this.state.date,this.state.id);
+      this.notif.scheduleNotif(this.state.date,this.state.id,this.state.text);
     }
     else
     this.notif.cancelNotif(this.state.id);

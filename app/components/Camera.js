@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button,Linking } from 'react-native';
 
 export default class DetailsScreen extends React.Component {
     render() {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, Text, View,TouchableOpacity,Alert,Image, Navigator} from 'react-native';
+import {AppRegistry, Text, View,TouchableOpacity,Alert,Image, Navigator,Linking} from 'react-native';
 import {CameraKitCamera,CameraKitCameraScreen} from 'react-native-camera-kit';
 // import Permissions from 'react-native-permissions'
 
@@ -35,7 +35,19 @@ export default class myapp extends  React.Component
   }
 
 
-  
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    console.log(navigationOptions);
+    // Notice the logs ^
+    // sometimes we call with the default navigationOptions and other times
+    // we call this with the previous navigationOptions that were returned from
+    // this very function
+    return {
+      headerTitle: <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL('http://maps.google.com/maps?q='+navigation.getParam('latitude', 'A Nested Details Screen')+","+navigation.getParam('longitude', 'A Nested Details Screen'))}>
+  Where am I?
+</Text>
+    };
+  };
   render()
   {
    

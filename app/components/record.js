@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Platform,
   PermissionsAndroid,
+  Linking
 } from 'react-native';
 
 import Sound from 'react-native-sound';
@@ -34,7 +35,19 @@ class AudioExample extends Component {
         AudioEncodingBitRate: 32000
       });
     }
-
+    static navigationOptions = ({ navigation, navigationOptions }) => {
+      console.log(navigationOptions);
+      // Notice the logs ^
+      // sometimes we call with the default navigationOptions and other times
+      // we call this with the previous navigationOptions that were returned from
+      // this very function
+      return {
+        headerTitle: <Text style={{color: 'blue'}}
+        onPress={() => Linking.openURL('http://maps.google.com/maps?q='+navigation.getParam('latitude', 'A Nested Details Screen')+","+navigation.getParam('longitude', 'A Nested Details Screen'))}>
+    Where am I?
+  </Text>
+      };
+    };
     componentDidMount() {
       AudioRecorder.requestAuthorization().then((isAuthorised) => {
         this.setState({ hasPermission: isAuthorised });

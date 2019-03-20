@@ -8,17 +8,34 @@ import {
   Alert,
   Text,
   StyleSheet,
+  Linking,
 ImageBackground
 } from 'react-native';
 
 export default class Myproject extends Component {
   constructor(props) {
     super(props);
-    
+    this.state = {
+      latitude: null,
+      longitude: null,
+      error: null,
+    };
 
   }
+ 
 
   componentWillMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
     setInterval(
       function() {
         this.setState({
@@ -50,6 +67,11 @@ export default class Myproject extends Component {
           {this.state.curDate}
           {'\n'}
           {this.state.curTime}
+          {'\n'}
+          <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL('http://maps.google.com/maps?q='+this.state.latitude+","+this.state.longitude)}>
+  Where am I?
+</Text>
         </Text>
 
         <Text
@@ -64,16 +86,18 @@ export default class Myproject extends Component {
 
         <View style={{ marginTop: 15, fontSize: 50 }}>
           <Button
-            onPress={() => this.props.navigation.navigate('Memo')}
-            title="Take a Picture"
+            onPress={() => this.props.navigation.navigate('Memo',{latitude: this.state.latitude,
+              longitude: this.state.longitude})}
+            title="Memo"
             color="#9acd32"
           />
         </View>
 
         <View style={{ marginTop: 15 }}>
           <Button
-            onPress={() => this.props.navigation.navigate('Details')}
-            title="Search"
+            onPress={() => this.props.navigation.navigate('Event',{latitude: this.state.latitude,
+              longitude: this.state.longitude})}
+            title="Event"
             color="#66cdaa"
           />
         </View>
@@ -81,16 +105,26 @@ export default class Myproject extends Component {
         <View style={{ marginTop: 15 }}>
           <Button
             onPress={() => this.props.navigation.navigate('Location')}
-            title="Record Yourself"
+            title="Map"
             color="#708090"
           />
         </View>
         <View style={{ marginTop: 15 }}>
           <Button
-            onPress={() => this.props.navigation.navigate('Record')}
+            onPress={() => this.props.navigation.navigate('Record',{latitude: this.state.latitude,
+              longitude: this.state.longitude})}
             title="Record Yourself"
-            color="#708090"
+            color="#ee42f4"
           />
+        </View>
+        <View style={{ marginTop: 15 }}>
+          <Button
+            onPress={() => this.props.navigation.navigate('Cameras',{latitude: this.state.latitude,
+              longitude: this.state.longitude})}
+            title="Camera"
+            color="#4286f4"
+          />
+       
         </View>
       </View>
     );

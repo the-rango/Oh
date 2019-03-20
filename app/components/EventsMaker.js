@@ -1,10 +1,11 @@
 
 
 import React, { Component } from "react";
-import { Text, TouchableOpacity, View,Button,FlatList } from "react-native";
+import { Text, TouchableOpacity, View,Button,FlatList,Linking } from "react-native";
 import Dialog from "react-native-dialog";
  import Event from "./Event";
 export default class DateTimePickerTester extends Component {
+  
   constructor(props){
     super(props);
     
@@ -13,6 +14,8 @@ export default class DateTimePickerTester extends Component {
     text : "",
     listOfEvents:[],
     id:0
+,longitude:this.props.navigation.getParam('longitude', -1),
+latitude:this.props.navigation.getParam('latitude',-1)
 
   };
 }
@@ -35,6 +38,20 @@ export default class DateTimePickerTester extends Component {
   {
     this.setState({id:this.state.id++,dialogVisible:false,listOfEvents:this.state.listOfEvents.concat([this.state.text])});
   }
+
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    console.log(navigationOptions);
+    // Notice the logs ^
+    // sometimes we call with the default navigationOptions and other times
+    // we call this with the previous navigationOptions that were returned from
+    // this very function
+    return {
+      headerTitle: <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL('http://maps.google.com/maps?q='+navigation.getParam('latitude', 'A Nested Details Screen')+","+navigation.getParam('longitude', 'A Nested Details Screen'))}>
+  Where am I?
+</Text>
+    };
+  };
   render() {
     return (
       <View>
@@ -49,9 +66,9 @@ export default class DateTimePickerTester extends Component {
         />
         
         <Dialog.Container visible={this.state.dialogVisible}>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Input           placeholder="what do u want!"
- label="Email" onChangeText={(email ) => this.textChange(email)}
+          <Dialog.Title>Event</Dialog.Title>
+          <Dialog.Input           placeholder="Enter"
+ label="Name" onChangeText={(email ) => this.textChange(email)}
       />
           <Dialog.Button label="Cancel" onPress={this.handleCancel} />
           <Dialog.Button label="Ok" onPress={this.submitText} />
