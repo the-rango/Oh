@@ -11,6 +11,7 @@ import EventScreen from "./app/components/EventsMaker"
 import LocationScreen  from "./app/components/getLocation"
 import Memo from "./app/components/memo"
 import Record from "./app/components/record"
+import BEZOS from "./app/components/BEZOS"
 const AppNavigator = createStackNavigator({
   Home:  HomeScreen,
   SearchImage:SearchImage,
@@ -20,7 +21,8 @@ const AppNavigator = createStackNavigator({
   Event:EventScreen,
   Location:LocationScreen,
   Memo:Memo,
-  Record:Record
+  Record:Record,
+  BEZOS:BEZOS
 }, {
     initialRouteName: 'Home',
 });

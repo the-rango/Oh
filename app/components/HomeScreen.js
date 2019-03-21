@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import {
   Platform,
   AppRegistry,
@@ -9,6 +10,7 @@ import {
   Text,
   StyleSheet,
   Linking,
+  TextInput,
 ImageBackground
 } from 'react-native';
 
@@ -19,6 +21,7 @@ export default class Myproject extends Component {
       latitude: null,
       longitude: null,
       error: null,
+      text:""
     };
 
   }
@@ -51,7 +54,7 @@ export default class Myproject extends Component {
   render() {
     return (
       <View style={{ flex: 2, justifyContent: 'center', margin: 15, backgroundColor: '#fffff0' }}>
-
+  
         <Text
           style={{
             fontSize: 16,
@@ -83,7 +86,28 @@ export default class Myproject extends Component {
           }}>
           Hello User! {'\n'}Welcome to Oh! {'\n'}
         </Text>
+        <TextInput
+          style={{
+            height: 40,
+            borderColor: 'gray',
+            borderWidth: 1,
+            textAlign: 'center',
+            marginBottom: 4,
+          }}
+          clearTextOnFocus="true"
+          onChangeText={text => this.setState({ text })}
+          value={this.state.text}
+          placeholder="Search..."
+          clearButtonMode="always"
+        />
 
+        <Button
+          onPress={()=>{this.props.navigation.navigate('BEZOS',{latitude: this.state.latitude,
+            longitude: this.state.longitude})}}
+          title="Submit"
+          color="#DB4437"
+          accessibilityLabel="Search"
+        />
         <View style={{ marginTop: 15, fontSize: 50 }}>
           <Button
             onPress={() => this.props.navigation.navigate('Memo',{latitude: this.state.latitude,

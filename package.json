@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.6",
+    "react-native-atoz-listview": "0.0.7",
     "react-native-audio": "^4.3.0",
     "react-native-camera-kit": "^7.3.4",
     "react-native-dialog": "^5.5.0",
@@ -16,6 +17,7 @@
     "react-native-gesture-handler": "^1.1.0",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-push-notification": "^3.1.2",
+    "react-native-search-box": "0.0.19",
     "react-native-sound": "^0.10.12",
     "react-native-vector-icons": "^6.3.0",
     "react-navigation": "^3.3.2"
